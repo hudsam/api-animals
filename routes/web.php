@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -15,4 +17,16 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->group(
+    [
+        'prefix' => 'api',
+    ], function () use ($router)
+{
+    $router->get('/', function() {
+        return redirect('api/index');
+    });
+
+    $router->get('/index', 'AnimalController@index');
 });
