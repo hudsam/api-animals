@@ -1,0 +1,11 @@
+/vendor
+.editorconfig
+.env
+.env.example
+.styleci.yml
+phpunit.xml
+README.md
+/.idea
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
