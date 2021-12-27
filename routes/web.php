@@ -22,6 +22,7 @@ $router->get('/', function () use ($router) {
 $router->group(
     [
         'prefix' => 'api',
+        'number' => '[1-10]+',
     ], function () use ($router)
 {
     $router->get('/', function() {
@@ -29,4 +30,5 @@ $router->group(
     });
 
     $router->get('/index', 'AnimalController@index');
+    $router->get('/random/{number}', 'AnimalController@random');
 });

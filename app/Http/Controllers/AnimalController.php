@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class AnimalController extends Controller
@@ -24,5 +25,34 @@ class AnimalController extends Controller
                 ],
             ])
             ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function random($number)
+    {
+        $response = null;
+        $request = Http::get($this->uri_api . $number);
+
+        if ($request->status() === 200)
+        {
+            $request = Response()
+                ->json([
+                    'status' => $request->status(),
+                    'number' => $number,
+                    'data' => json_decode($request->body(), true),
+                ])
+                ->setStatusCode($request->status());
+        }
+        else
+        {
+            $request = Response()
+                ->json([
+                    'status' => $request->status(),
+                    'number' => $number,
+                    'message' => 'Set `number` between 1 - 10 to get data animal(s)',
+                ])
+                ->setStatusCode($request->status());
+        }
+
+        return $request;
     }
 }
